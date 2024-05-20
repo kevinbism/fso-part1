@@ -2,7 +2,34 @@ import { useState } from 'react';
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
-const P = ({ value, text }) => (
+const Statistics = ({ good, neutral, bad, total, average, positive }) => (
+  <>
+    <h2>statistics</h2>
+    <Block
+      text="good"
+      value={good}
+    />
+    <Block
+      text="neutral"
+      value={neutral}
+    />
+    <Block
+      text="bad"
+      value={bad}
+    />
+    <Block
+      text="all"
+      value={total}
+    />
+    <Block
+      text="average"
+      value={average}
+    />
+    <p>positive {positive}%</p>
+  </>
+);
+
+const Block = ({ value, text }) => (
   <p>
     {text} {value}
   </p>
@@ -64,26 +91,13 @@ const Unicafe = () => {
         onClick={handleBad}
         text="bad"
       />
-
-      <h2>statistics</h2>
-      <P
-        text="good"
-        value={good}
+      <Statistics
+        good={good}
+        neutral={neutral}
+        total={total}
+        average={average}
+        positive={positive}
       />
-      <P
-        text="neutral"
-        value={neutral}
-      />
-      <P
-        text="bad"
-        value={bad}
-      />
-      <P
-        text="all"
-        value={total}
-      />
-      <p>average {average}</p>
-      <p>positive {positive}%</p>
     </>
   );
 };
