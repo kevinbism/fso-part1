@@ -7,35 +7,38 @@ const Statistics = ({ good, neutral, bad, total, average, positive }) => {
     return <p>No feedback given</p>;
   } else {
     return (
-      <>
+      <div>
         <h2>statistics</h2>
-        <Block
+        <StatisticLine
           text="good"
           value={good}
         />
-        <Block
+        <StatisticLine
           text="neutral"
           value={neutral}
         />
-        <Block
+        <StatisticLine
           text="bad"
           value={bad}
         />
-        <Block
+        <StatisticLine
           text="all"
           value={total}
         />
-        <Block
+        <StatisticLine
           text="average"
           value={average}
         />
-        <p>positive {positive}%</p>
-      </>
+        <StatisticLine
+          text="positive"
+          value={positive + '%'}
+        />
+      </div>
     );
   }
 };
 
-const Block = ({ value, text }) => (
+const StatisticLine = ({ value, text }) => (
   <p>
     {text} {value}
   </p>
@@ -83,7 +86,7 @@ const Unicafe = () => {
   };
 
   return (
-    <>
+    <div>
       <h2>give feedback</h2>
       <Button
         onClick={handleGood}
@@ -105,7 +108,7 @@ const Unicafe = () => {
         average={average}
         positive={positive}
       />
-    </>
+    </div>
   );
 };
 
