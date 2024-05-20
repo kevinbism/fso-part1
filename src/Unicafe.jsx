@@ -2,32 +2,38 @@ import { useState } from 'react';
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
-const Statistics = ({ good, neutral, bad, total, average, positive }) => (
-  <>
-    <h2>statistics</h2>
-    <Block
-      text="good"
-      value={good}
-    />
-    <Block
-      text="neutral"
-      value={neutral}
-    />
-    <Block
-      text="bad"
-      value={bad}
-    />
-    <Block
-      text="all"
-      value={total}
-    />
-    <Block
-      text="average"
-      value={average}
-    />
-    <p>positive {positive}%</p>
-  </>
-);
+const Statistics = ({ good, neutral, bad, total, average, positive }) => {
+  if (total === 0) {
+    return <p>No feedback given</p>;
+  } else {
+    return (
+      <>
+        <h2>statistics</h2>
+        <Block
+          text="good"
+          value={good}
+        />
+        <Block
+          text="neutral"
+          value={neutral}
+        />
+        <Block
+          text="bad"
+          value={bad}
+        />
+        <Block
+          text="all"
+          value={total}
+        />
+        <Block
+          text="average"
+          value={average}
+        />
+        <p>positive {positive}%</p>
+      </>
+    );
+  }
+};
 
 const Block = ({ value, text }) => (
   <p>
@@ -94,6 +100,7 @@ const Unicafe = () => {
       <Statistics
         good={good}
         neutral={neutral}
+        bad={bad}
         total={total}
         average={average}
         positive={positive}
