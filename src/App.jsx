@@ -44,6 +44,7 @@ const App = () => {
     ],
   };
 
+  // Trouble with the sum function
   function sum(n) {
     let result = 0;
     return result + n;
