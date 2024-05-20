@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+
 const P = ({ value, text }) => (
   <p>
     {text} {value}
@@ -11,17 +12,41 @@ const Unicafe = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [positive, setPositive] = useState(0);
+  const [average, setAverage] = useState(0);
 
   const handleGood = () => {
-    setGood(good + 1);
+    const newGood = good + 1;
+    const newTotal = total + 1;
+    setGood(newGood);
+    setTotal(newTotal);
+    setPositive((newGood / newTotal) * 100);
+    setAverage(calculateAverage(newGood, neutral, bad));
   };
 
   const handleNeutral = () => {
+    const newTotal = total + 1;
     setNeutral(neutral + 1);
+    setTotal(newTotal);
+    setPositive((good / newTotal) * 100);
+    setAverage(calculateAverage(good, neutral, bad));
   };
 
   const handleBad = () => {
-    setBad(bad + 1);
+    const newBad = bad + 1;
+    const newTotal = total + 1;
+    setBad(newBad);
+    setTotal(newTotal);
+    setPositive((good / newTotal) * 100);
+    setAverage(calculateAverage(good, neutral, newBad));
+  };
+
+  const calculateAverage = (good, neutral, bad) => {
+    const totalFeedback = good - bad;
+    const total = good + neutral + bad;
+    const average = total !== 0 ? totalFeedback / total : 0;
+    return average;
   };
 
   return (
@@ -53,6 +78,12 @@ const Unicafe = () => {
         text="bad"
         value={bad}
       />
+      <P
+        text="all"
+        value={total}
+      />
+      <p>average {average}</p>
+      <p>positive {positive}%</p>
     </>
   );
 };
